@@ -41,12 +41,21 @@ import java.util.Calendar;
 import static android.R.id.text1;
 
 
-public class HomeFragment extends Fragment  {
+public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     OperacionesBaseDatos datos;
     Context thiscontext;
     View rootView;
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 
 
     public class TareaPruebaDatos extends AsyncTask<Void, Void, Void> {
@@ -67,10 +76,10 @@ public class HomeFragment extends Fragment  {
 
 
                 // Inserción Productos
-                String producto1 = datos.insertarProducto(new Producto(null, "Manzana unidad", 20, 1000));
-                String producto2 = datos.insertarProducto(new Producto(null, "Pera unidad", 30, 2300));
-                String producto3 = datos.insertarProducto(new Producto(null, "Guayaba unidad", 100, 5500));
-                String producto4 = datos.insertarProducto(new Producto(null, "Maní unidad", 10, 6000));
+                String producto1 = datos.insertarProducto(new Producto(null, "Manzana", 10000, 10));
+                String producto2 = datos.insertarProducto(new Producto(null, "Pera", 20000, 20));
+                String producto3 = datos.insertarProducto(new Producto(null, "naranja", 30000, 30));
+                String producto4 = datos.insertarProducto(new Producto(null, "Maní", 40000, 40));
 
                 // Inserción Pedidos
                 String pedido1 = datos.insertarCabeceraPedido(
@@ -137,9 +146,8 @@ public class HomeFragment extends Fragment  {
         //Añadimos el layout para el menú
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         prueba.setAdapter(adapter2);
-
-            String cant = String.valueOf(prueba.getCount());
-            Toast.makeText(getContext(),"Now onStart() calls "+cant, Toast.LENGTH_LONG).show(); //onStart Called
+        String cant = String.valueOf(prueba.getCount());
+        Toast.makeText(getContext(),"Now onStart() calls "+cant, Toast.LENGTH_LONG).show(); //onStart Called
 
 
         // accion del boton
@@ -154,7 +162,7 @@ public class HomeFragment extends Fragment  {
                     fragmentTransaction.commit();
 
                     // set the toolbar title
-                    ((MainActivity)getActivity()).getSupportActionBar().setTitle("Pedidos");
+                    ((MainActivity)getActivity()).getSupportActionBar().setTitle("Productos");
                 }
             }
         });

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="info.androidhive.materialdesign.activity.FriendsFragment">
+    tools:context="com.herprogramacion.pedidos.ui.FriendsFragment">
 
 
     <TextView
@@ -31,9 +31,9 @@
         android:id="@+id/textView7" />
 
     <Spinner
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
+        android:id="@+id/spinProducto"
         android:layout_marginTop="35dp"
         android:layout_below="@+id/textView7"
         android:layout_alignParentLeft="true"
@@ -44,16 +44,16 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/inPrecio"
+        android:id="@+id/precio"
         android:textAlignment="center"
         android:width="150dp"
-        android:layout_alignTop="@+id/editText5"
+        android:layout_alignTop="@+id/cantidad"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="41dp"
         android:layout_marginStart="41dp"
-        android:enabled="true"
-        android:editable="true" />
+        android:enabled="false"
+        android:editable="false" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,10 +62,9 @@
         android:id="@+id/textView8"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="25dp"
-        android:labelFor="@id/inPrecio"
         android:layout_marginLeft="78dp"
         android:layout_marginStart="78dp"
-        android:layout_above="@+id/editText5"
+        android:layout_above="@+id/cantidad"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -73,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/boton_aceptar"
-        android:id="@+id/button"
+        android:id="@+id/btnProducto"
         android:background="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -89,7 +88,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText5"
+        android:id="@+id/cantidad"
         android:textAlignment="center"
         android:width="100dp"
         android:layout_centerVertical="true"
@@ -106,31 +105,30 @@
         android:id="@+id/textView10"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="25dp"
-        android:labelFor="@id/inPrecio"
-        android:layout_above="@+id/editText5"
-        android:layout_alignLeft="@+id/editText5"
-        android:layout_alignStart="@+id/editText5" />
+        android:layout_above="@+id/cantidad"
+        android:layout_alignLeft="@+id/cantidad"
+        android:layout_alignStart="@+id/cantidad" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned"
         android:ems="10"
-        android:id="@+id/editText6"
-        android:layout_above="@+id/button"
-        android:layout_marginBottom="38dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        />
+        android:id="@+id/total"
+        android:layout_marginBottom="29dp"
+        android:enabled="false"
+        android:inputType="none"
+        android:layout_above="@+id/btnProducto"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textAppearance="@color/primary_material_dark"
+        android:textSize="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/total"
         android:id="@+id/textView9"
-        android:layout_above="@+id/editText6"
+        android:layout_above="@+id/total"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30dp" />

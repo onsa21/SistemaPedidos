@@ -24,7 +24,7 @@ public final class OperacionesBaseDatos {
     private static OperacionesBaseDatos instancia = new OperacionesBaseDatos();
 
 
-    private OperacionesBaseDatos() {
+    public OperacionesBaseDatos() {
     }
 
     public static OperacionesBaseDatos obtenerInstancia(Context contexto) {
