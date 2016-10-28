@@ -12,12 +12,12 @@
 
 
     <!--matrial  -->
-    <string name="action_search">Search</string>
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
-    <string name="nav_item_home">Home</string>
-    <string name="nav_item_friends">Friends</string>
-    <string name="nav_item_notifications">Messages</string>
+    <string name="action_search">Buscar</string>
+    <string name="drawer_open">Abrir</string>
+    <string name="drawer_close">Cerrar</string>
+    <string name="nav_item_home">Clientes</string>
+    <string name="nav_item_friends">Productos</string>
+    <string name="nav_item_notifications">Pedidos</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
@@ -26,9 +26,17 @@
         <item>@string/nav_item_notifications</item>
     </string-array>
 
-    <string name="title_messages">Messages</string>
-    <string name="title_friends">Friends</string>
-    <string name="title_home">Home</string>
+    <string name="title_messages">Pedidos</string>
+    <string name="title_friends">Productos</string>
+    <string name="title_home">Clientes</string>
+
+    <string-array name="cabecera_tabla">
+        <item>Item</item>
+        <item>Producto</item>
+        <item>Precio</item>
+        <item>Cantidad</item>
+        <item>Total</item>
+    </string-array>
 
 
 

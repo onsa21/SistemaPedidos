@@ -120,8 +120,8 @@ public final class OperacionesBaseDatos {
     public Cursor obtenerDetallesPorIdPedido(String idCabeceraPedido) {
         SQLiteDatabase db = baseDatos.getReadableDatabase();
 
-        String sql = String.format("SELECT * FROM %s WHERE %s=?",
-                Tablas.DETALLE_PEDIDO, CabecerasPedido.ID);
+        String sql = String.format("SELECT a.*, p.nombre FROM %s a JOIN %s p ON a.id_producto= p.id  WHERE a.%s=?",
+                Tablas.DETALLE_PEDIDO, Tablas.PRODUCTO, CabecerasPedido.ID);
 
         String[] selectionArgs = {idCabeceraPedido};
 

@@ -1,7 +1,5 @@
 package com.herprogramacion.pedidos.ui;
 
-import android.database.DatabaseUtils;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,21 +7,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.herprogramacion.pedidos.R;
-import com.herprogramacion.pedidos.modelo.CabeceraPedido;
-import com.herprogramacion.pedidos.modelo.Cliente;
-import com.herprogramacion.pedidos.modelo.DetallePedido;
-import com.herprogramacion.pedidos.modelo.Producto;
-import com.herprogramacion.pedidos.sqlite.OperacionesBaseDatos;
-
-import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
@@ -97,15 +86,15 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         String title = getString(R.string.app_name);
         switch (position) {
             case 0:
-                fragment = new HomeFragment();
+                fragment = new ClienteFragment();
                 title = getString(R.string.title_home);
                 break;
             case 1:
-                fragment = new FriendsFragment();
+                fragment = new ProductoFragment();
                 title = getString(R.string.title_friends);
                 break;
             case 2:
-                fragment = new MessagesFragment();
+                fragment = new PedidosFragment();
                 title = getString(R.string.title_messages);
                 break;
             default:

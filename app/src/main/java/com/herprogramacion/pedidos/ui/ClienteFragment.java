@@ -5,7 +5,6 @@ package com.herprogramacion.pedidos.ui;
  */
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.AsyncTask;
@@ -13,36 +12,31 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.herprogramacion.pedidos.R;
 import com.herprogramacion.pedidos.modelo.CabeceraPedido;
 import com.herprogramacion.pedidos.modelo.Cliente;
-import com.herprogramacion.pedidos.modelo.DetallePedido;
 import com.herprogramacion.pedidos.modelo.Producto;
 import com.herprogramacion.pedidos.sqlite.ContratoPedidos;
 import com.herprogramacion.pedidos.sqlite.OperacionesBaseDatos;
 
 import java.util.Calendar;
 
-import static android.R.id.text1;
 
+public class ClienteFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-
+    String selection;
     OperacionesBaseDatos datos;
     Context thiscontext;
     View rootView;
@@ -82,16 +76,16 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 String producto4 = datos.insertarProducto(new Producto(null, "Maní", 40000, 40));
 
                 // Inserción Pedidos
-                String pedido1 = datos.insertarCabeceraPedido(
-                        new CabeceraPedido(null, fechaActual, cliente1, "1000"));
-                String pedido2 = datos.insertarCabeceraPedido(
-                        new CabeceraPedido(null, fechaActual,cliente2, "20000"));
+           //     String pedido1 = datos.insertarCabeceraPedido(
+            //            new CabeceraPedido(null, fechaActual, cliente1, "1000"));
+            //    String pedido2 = datos.insertarCabeceraPedido(
+                 //       new CabeceraPedido(null, fechaActual,cliente2, "20000"));
 
                 // Inserción Detalles
-                datos.insertarDetallePedido(new DetallePedido(pedido1, 1, producto1, 5, 2));
-                datos.insertarDetallePedido(new DetallePedido(pedido1, 2, producto2, 10, 3));
-                datos.insertarDetallePedido(new DetallePedido(pedido2, 1, producto3, 30, 5));
-                datos.insertarDetallePedido(new DetallePedido(pedido2, 2, producto4, 20, 1));
+              //  datos.insertarDetallePedido(new DetallePedido(pedido1, 1, producto1, 5, 2));
+              //  datos.insertarDetallePedido(new DetallePedido(pedido1, 2, producto2, 10, 3));
+              //  datos.insertarDetallePedido(new DetallePedido(pedido2, 1, producto3, 30, 5));
+              //  datos.insertarDetallePedido(new DetallePedido(pedido2, 2, producto4, 20, 1));
 
                 // Eliminación Pedido
                 // datos.eliminarCabeceraPedido(pedido1);
@@ -118,7 +112,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         }
     }
 
-    public HomeFragment() {
+    public ClienteFragment() {
         // Required empty public constructor
     }
 
@@ -147,14 +141,49 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         prueba.setAdapter(adapter2);
         String cant = String.valueOf(prueba.getCount());
-        Toast.makeText(getContext(),"Now onStart() calls "+cant, Toast.LENGTH_LONG).show(); //onStart Called
+        //Toast.makeText(getContext(),"Now onStart() calls "+cant, Toast.LENGTH_LONG).show(); //onStart Called
 
 
         // accion del boton
         Button buttonClick = (Button) rootView.findViewById(R.id.btnCliente);
         buttonClick.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Fragment fragment = new FriendsFragment();
+                Fragment fragment = new ProductoFragment();
+
+                //guardar el cliente seleccionado
+                String idcliente = null;
+                //obtener texto del spinner
+                Spinner spinner =  (Spinner) rootView.findViewById(R.id.spinCliente);
+                TextView textView = (TextView)spinner.getSelectedView();
+                String result = textView.getText().toString();
+
+                //recorrer la base de datos
+                Cursor c = datos.obtenerClientes();
+                if (c.moveToFirst()) {
+                    //Recorremos el cursor hasta que no haya más registros
+
+                    int idColumn = c.getColumnIndex(ContratoPedidos.Clientes.ID);
+                    int nombreColumn = c.getColumnIndex(ContratoPedidos.Clientes.NOMBRES);
+
+                    //Recorremos el cursor
+                    for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+                        String name = c.getString(nombreColumn);
+                        String id = c.getString(idColumn);
+
+                        Log.d("IF: ", result+" = " +name);
+                        if(result.equals(name)){
+                            idcliente = id;
+                              Toast.makeText(getContext(), name + " =  " +  result, Toast.LENGTH_LONG).show(); //onStart Called
+                        }
+                    }
+                }
+
+                Bundle parametro = new Bundle();
+                 parametro.putString("idcliente" , idcliente);
+                parametro.putString("cabecera" , "0");
+                parametro.putInt("secuencia" , 1);
+                fragment.setArguments(parametro);
+
                 if (fragment != null) {
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -171,7 +200,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         rootView = inflater.inflate(R.layout.fragment_home, container, false);
+         rootView = inflater.inflate(R.layout.fragment_cliente, container, false);
         thiscontext = container.getContext();
 
         // creacion base de datos
@@ -200,7 +229,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     public class MyOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
         public void onItemSelected(AdapterView parent, View view, int pos,long id) {
             if (parent.getId() == R.id.spinCliente) {
-                String selection = ((String) parent.getItemAtPosition(pos)).toString();
+                selection = ((String) parent.getItemAtPosition(pos)).toString();
                 //Mostramos la selección actual del Spinner
                 Toast.makeText(getContext(),"Selección actual: "+ selection,Toast.LENGTH_SHORT).show();
             }
