@@ -142,20 +142,7 @@ public class PedidosFragment extends Fragment {
             }
         }
 
-        /*TableLayout tl =  (TableLayout) rootView.findViewById(R.id.tabla);
-
-        Tabla tabla = new Tabla(getActivity(),(TableLayout) rootView.findViewById(R.id.tabla));
-        tabla.agregarCabecera(R.array.cabecera_tabla);
-        for(int i = 0; i < 15; i++)
-        {
-            ArrayList<String> elementos = new ArrayList<String>();
-            elementos.add(Integer.toString(i));
-            elementos.add(datos.get(0));
-            elementos.add(datos.get(1));
-            elementos.add(datos.get(2));
-            elementos.add(datos.get(3));
-            tabla.agregarFilaTabla(elementos);
-        }*/
+        Toast.makeText(getContext(),"Pedido Realizado correctamente ",Toast.LENGTH_SHORT).show();
 
     }
 

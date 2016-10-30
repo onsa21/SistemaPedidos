@@ -40,6 +40,7 @@ public class ClienteFragment extends Fragment implements AdapterView.OnItemSelec
     OperacionesBaseDatos datos;
     Context thiscontext;
     View rootView;
+    String idcliente = "0";
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -123,25 +124,15 @@ public class ClienteFragment extends Fragment implements AdapterView.OnItemSelec
         super.onCreate(savedInstanceState);
 
 
+
+
     }
 
     @Override
     public void onStart(){
         super.onStart();
 
-        // poblar el spinner
-        Spinner prueba = (Spinner) rootView.findViewById(R.id.spinCliente);
-        //ViewClient vc = new ViewClient();
-       // SimpleCursorAdapter adapter;
-        //Creamos el cursor
-        Cursor c = datos.obtenerClientes();
-        //Creamos el adaptador
-        SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(thiscontext,android.R.layout.simple_spinner_item,c,new String[] {"nombres"},new int[] {android.R.id.text1});
-        //Añadimos el layout para el menú
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        prueba.setAdapter(adapter2);
-        String cant = String.valueOf(prueba.getCount());
-        //Toast.makeText(getContext(),"Now onStart() calls "+cant, Toast.LENGTH_LONG).show(); //onStart Called
+
 
 
         // accion del boton
@@ -151,7 +142,7 @@ public class ClienteFragment extends Fragment implements AdapterView.OnItemSelec
                 Fragment fragment = new ProductoFragment();
 
                 //guardar el cliente seleccionado
-                String idcliente = null;
+
                 //obtener texto del spinner
                 Spinner spinner =  (Spinner) rootView.findViewById(R.id.spinCliente);
                 TextView textView = (TextView)spinner.getSelectedView();
@@ -173,7 +164,7 @@ public class ClienteFragment extends Fragment implements AdapterView.OnItemSelec
                         Log.d("IF: ", result+" = " +name);
                         if(result.equals(name)){
                             idcliente = id;
-                              Toast.makeText(getContext(), name + " =  " +  result, Toast.LENGTH_LONG).show(); //onStart Called
+
                         }
                     }
                 }
@@ -209,6 +200,19 @@ public class ClienteFragment extends Fragment implements AdapterView.OnItemSelec
 
         new TareaPruebaDatos().execute();
 
+        // poblar el spinner
+        Spinner prueba = (Spinner) rootView.findViewById(R.id.spinCliente);
+        // SimpleCursorAdapter adapter;
+        //Creamos el cursor
+        Cursor c = datos.obtenerClientes();
+        //Creamos el adaptador
+        SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(thiscontext,android.R.layout.simple_spinner_item,c,new String[] {"nombres"},new int[] {android.R.id.text1});
+        //Añadimos el layout para el menú
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prueba.setAdapter(adapter2);
+        String cant = String.valueOf(prueba.getCount());
+        //Toast.makeText(getContext(),"Now onStart() calls "+cant, Toast.LENGTH_LONG).show(); //onStart Called
+
 
 
         // Inflate the layout for this fragment
@@ -231,7 +235,7 @@ public class ClienteFragment extends Fragment implements AdapterView.OnItemSelec
             if (parent.getId() == R.id.spinCliente) {
                 selection = ((String) parent.getItemAtPosition(pos)).toString();
                 //Mostramos la selección actual del Spinner
-                Toast.makeText(getContext(),"Selección actual: "+ selection,Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getContext(),"Selección actual: "+ selection,Toast.LENGTH_SHORT).show();
             }
 
         }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,6 @@ import android.widget.Toast;
 
 import com.herprogramacion.pedidos.R;
 import com.herprogramacion.pedidos.modelo.CabeceraPedido;
-import com.herprogramacion.pedidos.modelo.Cliente;
 import com.herprogramacion.pedidos.modelo.DetallePedido;
 import com.herprogramacion.pedidos.sqlite.ContratoPedidos;
 import com.herprogramacion.pedidos.sqlite.OperacionesBaseDatos;
@@ -67,7 +67,7 @@ public class ProductoFragment extends Fragment implements AdapterView.OnItemSele
         datos.getDb().beginTransaction();
         // poblar el spinner
         Spinner prueba = (Spinner) rootView.findViewById(R.id.spinProducto);
-        //ViewClient vc = new ViewClient();
+
         // SimpleCursorAdapter adapter;
         //Creamos el cursor
         Cursor c = datos.obtenerProductos();
@@ -96,12 +96,17 @@ public class ProductoFragment extends Fragment implements AdapterView.OnItemSele
                         //total
                         EditText total =  (EditText) rootView.findViewById(R.id.total);
                         total.setText(tot.toString(),TextView.BufferType.NORMAL);
+                        total.setInputType(InputType.TYPE_NULL);
+
+
                     }
-                    ;
+
+
                 }
+
+
             }
         });
-
 
 
         // accion del boton
@@ -134,7 +139,7 @@ public class ProductoFragment extends Fragment implements AdapterView.OnItemSele
                         Log.d("IF: ", result+" = " +name);
                         if(result.equals(name)){
                             idproducto = id;
-                            Toast.makeText(getContext(), name + " =  " +  result, Toast.LENGTH_LONG).show(); //onStart Called
+                            //Toast.makeText(getContext(), name + " =  " +  result, Toast.LENGTH_LONG).show(); //onStart Called
                         }
                     }
                 }
@@ -182,7 +187,7 @@ public class ProductoFragment extends Fragment implements AdapterView.OnItemSele
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_friends, container, false);
+        rootView = inflater.inflate(R.layout.fragment_producto, container, false);
         thiscontext = container.getContext();
 
 
