@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,7 +92,7 @@ public class ProductoFragment extends Fragment implements AdapterView.OnItemSele
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(cantidad.getText() != null){
+                   /* if(cantidad.getText() != null){
                         Integer tot = Integer.parseInt(String.valueOf(cantidad.getText())) * Integer.parseInt(String.valueOf(precio.getText()));
                         //   Toast.makeText(getContext(), "lost focus " + tot.toString(), Toast.LENGTH_LONG).show(); //onStart Called;
                         //total
@@ -99,13 +101,48 @@ public class ProductoFragment extends Fragment implements AdapterView.OnItemSele
                         total.setInputType(InputType.TYPE_NULL);
 
 
-                    }
+                    }*/
 
 
                 }
 
+            }
+        });
+
+        //prueba
+        cantidad.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+               // Toast.makeText(getContext(),"ontextchange ", Toast.LENGTH_LONG).show(); //onStart Called
+            }
+
+
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int arg1, int arg2, int arg3) {
 
             }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                Log.d("Cantidad: ", cantidad.getText().toString());
+                if(cantidad.getText().toString().equals("")){
+
+                  //  cantidad.setText("0", TextView.BufferType.NORMAL);
+                }
+                if(cantidad.getText() != null && !cantidad.getText().toString().equals("") ){
+                    Integer tot = Integer.parseInt(String.valueOf(cantidad.getText())) * Integer.parseInt(String.valueOf(precio.getText()));
+                    //   Toast.makeText(getContext(), "lost focus " + tot.toString(), Toast.LENGTH_LONG).show(); //onStart Called;
+                    //total
+                    EditText total =  (EditText) rootView.findViewById(R.id.total);
+                    total.setText(tot.toString(),TextView.BufferType.NORMAL);
+                    total.setInputType(InputType.TYPE_NULL);
+
+
+                }
+            }
+
         });
 
 

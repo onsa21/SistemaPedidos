@@ -116,6 +116,7 @@
         android:id="@+id/total"
         android:layout_marginBottom="29dp"
         android:enabled="false"
+        android:text="0"
         android:inputType="none"
         android:windowSoftInputMode="stateHidden"
         android:focusable="false"
