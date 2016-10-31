@@ -90,16 +90,19 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 title = getString(R.string.title_home);
                 break;
             case 1:
-                fragment = new ProductoFragment();
-                title = getString(R.string.title_friends);
+                Toast.makeText(getApplicationContext(), "Sleccione el cliente para continuar", Toast.LENGTH_SHORT).show();
+               // fragment = new ProductoFragment();
+                //title = getString(R.string.title_friends);
                 break;
             case 2:
-                fragment = new PedidosFragment();
-                title = getString(R.string.title_messages);
+                Toast.makeText(getApplicationContext(), "Sleccione el cliente para continuar", Toast.LENGTH_SHORT).show();
+              //  fragment = new PedidosFragment();
+              //  title = getString(R.string.title_messages);
                 break;
             default:
                 break;
         }
+
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
